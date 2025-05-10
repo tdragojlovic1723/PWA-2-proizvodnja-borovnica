@@ -13,6 +13,8 @@ class SortaSeeder extends Seeder
      */
     public function run(): void
     {
+        // TODO: dodaj deskripcije i slike
+
         Sorta::create([
             'kind' => 'Bluecrop',
             'description' => '...',
