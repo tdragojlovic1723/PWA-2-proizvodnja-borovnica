@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             PlantazaSeeder::class,
             SortaSeeder::class,
             BerbaSeeder::class,
+
+            ReservationSeeder::class,
         ]);
     }
 }
