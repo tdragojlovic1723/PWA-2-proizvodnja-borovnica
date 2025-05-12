@@ -8,22 +8,22 @@ use Illuminate\Support\Facades\Route;
 // public
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('index');
 
 Route::get('/katalog', function () {
-    return view('welcome');
-});
+    return view('katalog');
+})->name('katalog');
 
 Route::get('/kontakt', function () {
     return view('kontakt');
-});
+})->name('kontakt');
 
 
 // admin, editor
 Route::middleware(['auth', 'role:admin,editor'])->group(function(){
-    Route::get('/admin/dashboard', function() {
-        return view('welcome');
-    });
+    Route::get('/admin//', function() {
+        return view('admin.index');
+    })->name('admin.index');
 });
 
 

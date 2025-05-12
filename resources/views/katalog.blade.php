@@ -1,9 +1,9 @@
 @extends('layouts/public')
 
 @section('title')
-Kontakt stranica
+Katalog
 @endsection
 
 @section('content')
-Kontakt
+Katalog
 @endsection
