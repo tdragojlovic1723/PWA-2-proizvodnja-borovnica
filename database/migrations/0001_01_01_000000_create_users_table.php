@@ -23,8 +23,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            // default rola je 3 -> obican user
-            $table->foreignId('role_id')->default('3')->constrained('roles');
+            $table->enum('role',['admin','editor','user'])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
