@@ -25,9 +25,9 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <body class="w3-black">
 
 <!-- Icon Bar (Sidebar - hidden on small screens) -->
-<nav class="w3-sidebar w3-bar-block w3-small w3-hide-small w3-center">
+<nav class="w3-sidebar w3-bar-block w3-hide-small w3-center" style="width: 7rem;">
   <!-- Avatar image in top left corner -->
-  <img src="{{ asset('raf-logo.png') }}" style="width:100%;height:5rem">
+  <img src="{{ asset('raf-logo.png') }}" class="p-2" style="width:100%;height:5rem">
   <a href="{{ route('index') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
     <i class="fa fa-home w3-large"></i>
     <p>Index</p>
@@ -64,7 +64,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   @if(Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'editor'))
     <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
       <i class="fa fa-home w3-large"></i>
-      <p>Admin dashboard</p>
+      <p>Admin home</p>
     </a>
   @endif
 </nav>
