@@ -17,8 +17,7 @@ return new class extends Migration
             $table->text("description");
             $table->decimal("average_fruit_size", 8, 2);
             $table->decimal("average_fertility", 8, 1);
-            // TODO: napravi da ovde ima default slika
-            $table->string("image");
+            $table->string("image")->default("default.jpg");
             $table->timestamps();
         });
     }

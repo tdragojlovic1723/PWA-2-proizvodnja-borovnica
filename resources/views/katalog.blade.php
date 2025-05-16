@@ -8,7 +8,7 @@ Katalog
 <h2 class="w3-text-light-grey text-center mb-5">Katalog</h2>
 
 <div class="w3-content w3-justify w3-text-grey w3-padding-64 p-3">
-  <div class="w3-full w3-padding">
+  <div class="w3-full w3-padding mb-5">
     <h3 class="w3-padding-16 w3-text-light-grey text-center">Plantaže</h3>
 
     <div class="row">
@@ -41,7 +41,17 @@ Katalog
             <div class="card-text p-2">
               <h3 class="card-title">{{ $s->kind }}</h3>
 
-              <p>{{ Str::limit($s->description, 100, '[Pročitaj više]') }}</p>
+              <style>
+                .text-3-lines {
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  display: -webkit-box;
+                  -webkit-line-clamp: 3;
+                  -webkit-box-orient: vertical;
+                }
+              </style>
+
+              <p class="text-3-lines">{{ Str::limit($s->description, 100, '...') }}</p>
 
               <a href="#test" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Opširnije</a>
             </div>
