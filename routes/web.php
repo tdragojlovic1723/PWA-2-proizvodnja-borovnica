@@ -1,8 +1,10 @@
 <?php
 
-use App\Http\Controllers\BerbaController;
+use App\Http\Controllers\PlantazaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Plantaza;
+use App\Models\Sorta;
 use Illuminate\Support\Facades\Route;
 
 // public
@@ -11,7 +13,10 @@ Route::get('/', function () {
 })->name('index');
 
 Route::get('/katalog', function () {
-    return view('katalog');
+    return view('katalog', [
+        "plantaze" => Plantaza::all(),
+        "sorte" => Sorta::all(),
+    ]);
 })->name('katalog');
 
 Route::get('/kontakt', function () {
