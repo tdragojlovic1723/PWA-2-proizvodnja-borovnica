@@ -1,9 +1,12 @@
 <?php
 
+use App\Http\Controllers\BerbaController;
 use App\Http\Controllers\PlantazaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Models\Berba;
 use App\Models\Plantaza;
+use App\Models\Reservation;
 use App\Models\Sorta;
 use Illuminate\Support\Facades\Route;
 
@@ -27,7 +30,13 @@ Route::get('/kontakt', function () {
 // admin, editor
 Route::middleware(['auth', 'role:admin,editor'])->group(function(){
     Route::get('/admin//', function() {
-        return view('admin.index');
+        $podaci = Berba::brojBerbiPoVrstiIzZemlje('Srbija');
+        $podaci2 = Reservation::brojRezervacijaPoMesecima();
+
+        return view('admin.index', [
+            "pie_chart_podaci" => $podaci,
+            "bar_chart_podaci" => $podaci2,
+        ]);
     })->name('admin.index');
 });
 

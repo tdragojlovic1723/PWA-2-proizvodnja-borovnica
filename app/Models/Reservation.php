@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 
 class Reservation extends Model
 {
@@ -19,5 +20,12 @@ class Reservation extends Model
 
     public function sorta() {
         return $this->belongsTo(Sorta::class);
+    }
+
+    public static function brojRezervacijaPoMesecima() {
+        return self::selectRaw('MONTHNAME(date_reserved) AS month, COUNT(*) AS br')
+                  ->groupByRaw('MONTH(date_reserved), MONTHNAME(date_reserved)')
+                  ->orderByRaw('MONTH(date_reserved)')
+                  ->get();
     }
 }

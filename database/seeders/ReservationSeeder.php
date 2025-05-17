@@ -75,5 +75,26 @@ class ReservationSeeder extends Seeder
             "kilos_reserved" => 250,
             "date_reserved" => "2024-05-23",
         ]);
+
+        Reservation::create([
+            "user_id" => 4,
+            "sorta_id" => 9,
+            "kilos_reserved" => 333,
+            "date_reserved" => "2024-08-23",
+        ]);
+
+        Reservation::create([
+            "user_id" => 5,
+            "sorta_id" => 9,
+            "kilos_reserved" => 550,
+            "date_reserved" => "2024-08-23",
+        ]);
+
+        Reservation::create([
+            "user_id" => 3,
+            "sorta_id" => 2,
+            "kilos_reserved" => 50,
+            "date_reserved" => "2024-11-23",
+        ]);
     }
 }
