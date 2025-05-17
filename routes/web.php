@@ -35,6 +35,14 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
 // regular user
 Route::middleware(['auth', 'role:user'])->group(function(){
     Route::get('/reservation-list', [ReservationController::class, 'list'])->name('reservation.list');
+
+    Route::get('/reservation-create', [ReservationController::class, 'create'])->name('reservation.create');
+    Route::post('/reservation-create', [ReservationController::class, 'store'])->name('reservation.store');
+
+    Route::get('/reservation-edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+    Route::post('/reservation-edit/{id}', [ReservationController::class, 'update'])->name('reservation.update');
+
+    Route::delete('/reservation-delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });
 
 

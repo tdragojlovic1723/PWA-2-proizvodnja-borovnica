@@ -28,53 +28,79 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
 <nav class="w3-sidebar w3-bar-block w3-hide-small w3-center" style="width: 7rem;">
   <!-- Avatar image in top left corner -->
   <img src="{{ asset('raf-logo.png') }}" class="p-2" style="width:100%;height:5rem">
-  <a href="{{ route('index') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="{{ route('index') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
     <i class="fa fa-home w3-large"></i>
     <p>Index</p>
   </a>
-  <a href="{{ route('katalog') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="{{ route('katalog') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
     <i class="fa fa-eye w3-large"></i>
     <p>Katalog</p>
   </a>
-  <a href="{{ route('kontakt') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
+  <a href="{{ route('kontakt') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
     <i class="fa fa-envelope w3-large"></i>
     <p>Kontakt</p>
   </a>
 
+  <!-- Rezervacije ulogovanih korisnika -->
+  @if(Auth::check() && Auth::user()->role !== 'admin')
+    <a href="{{ route('reservation.list') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
+      <i class="fa fa-ticket w3-large"></i>
+      <p>Rezervacije</p>
+    </a>
+  @endif
+
+  @if(Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'editor'))
+    <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
+      <i class="fa fa-home w3-large"></i>
+      <p>Admin home</p>
+    </a>
+  @endif
+
   @if(!Auth::check())
-    <a href="{{ route('login') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-envelope w3-large"></i>
+    <a href="{{ route('login') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
+      <i class="fa fa-user w3-large"></i>
       <p>Login</p>
     </a>
 
-    <a href="{{ route('register') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-envelope w3-large"></i>
+    <a href="{{ route('register') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
+      <i class="fa fa-user w3-large"></i>
       <p>Register</p>
     </a>
   @else
     <form method="POST" action="{{ route('logout') }}">
       @csrf
-      <button type="submit" class="w3-bar-item w3-button w3-padding-large w3-hover-black d-flex flex-column">
-        <i class="fa fa-envelope w3-large"></i>
+      <button type="submit" class="w3-bar-item w3-button w3-padding-small w3-hover-black d-flex flex-column">
+        <i class="fa fa-user w3-large"></i>
         Logout
       </button>
     </form>
-  @endif
-
-  @if(Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'editor'))
-    <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button w3-padding-large w3-hover-black">
-      <i class="fa fa-home w3-large"></i>
-      <p>Admin home</p>
-    </a>
   @endif
 </nav>
 
 <!-- Navbar on small screens (Hidden on medium and large screens) -->
 <div class="w3-top w3-hide-large w3-hide-medium" id="myNavbar">
   <div class="w3-bar w3-black w3-opacity w3-hover-opacity-off w3-center w3-small">
-    <a href="#index" class="w3-bar-item w3-button" style="width:25% !important">Index</a>
-    <a href="#katalog" class="w3-bar-item w3-button" style="width:25% !important">Katalog</a>
-    <a href="#kontakt" class="w3-bar-item w3-button" style="width:25% !important">Kontakt</a>
+    <a href="{{ route('index') }}" class="w3-bar-item w3-button" style="width:20% !important">Index</a>
+    <a href="{{ route('katalog') }}" class="w3-bar-item w3-button" style="width:20% !important">Katalog</a>
+    <a href="{{ route('kontakt') }}" class="w3-bar-item w3-button" style="width:20% !important">Kontakt</a>
+
+    @if(Auth::check() && Auth::user()->role !== 'admin')
+      <a href="{{ route('reservation.list') }}" class="w3-bar-item w3-button" style="width:20% !important">Rezervacije</a>
+    @endif
+
+    @if(Auth::check() && (Auth::user()->role === 'admin' || Auth::user()->role === 'editor'))
+      <a href="{{ route('admin.index') }}" class="w3-bar-item w3-button" style="width: 20% !important">Admin home</a>
+    @endif
+
+    @if(!Auth::check())
+      <a href="{{ route('login') }}" class="w3-bar-item w3-button" style="width:20% !important">Login</a>
+      <a href="{{ route('register') }}" class="w3-bar-item w3-button" style="width:20% !important">Register</a>
+    @else
+      <form method="POST" action="{{ route('logout') }}">
+        @csrf
+        <button type="submit" class="w3-bar-item w3-button" style="width:20% !important">Logout</button>
+      </form>
+    @endif
   </div>
 </div>
 
