@@ -42,7 +42,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
   </a>
 
   <!-- Rezervacije ulogovanih korisnika -->
-  @if(Auth::check() && Auth::user()->role !== 'admin')
+  @if(Auth::check() && Auth::user()->role === 'user')
     <a href="{{ route('reservation.list') }}" class="w3-bar-item w3-button w3-padding-small w3-hover-black">
       <i class="fa fa-ticket w3-large"></i>
       <p>Rezervacije</p>
@@ -84,7 +84,7 @@ body, h1,h2,h3,h4,h5,h6 {font-family: "Montserrat", sans-serif}
     <a href="{{ route('katalog') }}" class="w3-bar-item w3-button" style="width:20% !important">Katalog</a>
     <a href="{{ route('kontakt') }}" class="w3-bar-item w3-button" style="width:20% !important">Kontakt</a>
 
-    @if(Auth::check() && Auth::user()->role !== 'admin')
+    @if(Auth::check() && Auth::user()->role === 'user')
       <a href="{{ route('reservation.list') }}" class="w3-bar-item w3-button" style="width:20% !important">Rezervacije</a>
     @endif
 

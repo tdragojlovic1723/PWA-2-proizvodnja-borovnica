@@ -21,7 +21,9 @@
             <div id="layoutSidenav_content">
 
                 <main>
-                    @yield('content')
+                    <div class="p-3">
+                        @yield('content')
+                    </div>
                 </main>
 
             </div>
