@@ -6,12 +6,6 @@ Vase rezervacije
 
 @section('content')
 
-@if ($tk->role === 'user')
-  @php
-    $reservations = $tk->reservations
-  @endphp
-@endif
-
 <div class="w3-content w3-justify w3-text-grey w3-padding-64 p-3">
   <div class="w3-full w3-padding">
     @if (session('success'))

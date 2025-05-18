@@ -10,10 +10,17 @@ use Illuminate\Support\Facades\Auth;
 class ReservationController extends Controller
 {
     public function list() {
-        return view('reservation/list', [
-            "tk" => Auth::user(),
-            "reservations" => Reservation::all(),
-        ]);
+        if (Auth::user()->role === 'user') {
+            return view('reservation/list', [
+                "reservations" => Auth::user()->reservations,
+            ]);
+        } else {
+            // TODO: da li je potrebno ovo?
+            // ako editor ili admin pokusavaju da pristupe
+            return view('admin/reservation/list', [
+                "reservations" => Reservation::all(),
+            ]);
+        }
     }
 
     public function create() {

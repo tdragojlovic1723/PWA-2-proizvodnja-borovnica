@@ -8,9 +8,13 @@
                     Dashboard
                 </a>
                 <div class="sb-sidenav-menu-heading">Interface</div>
-                <a class="nav-link" href="/">
+                <a class="nav-link" href="{{ route('admin.index') }}">
                     <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
-                    Pocetna stranica
+                    Admin home
+                </a>
+                <a class="nav-link" href="{{ route('index') }}">
+                    <div class="sb-nav-link-icon"><i class="fas fa-home"></i></div>
+                    User home
                 </a>
             </div>
         </div>

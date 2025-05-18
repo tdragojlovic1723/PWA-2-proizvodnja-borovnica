@@ -4,6 +4,7 @@ use App\Http\Controllers\BerbaController;
 use App\Http\Controllers\PlantazaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SortaController;
 use App\Models\Berba;
 use App\Models\Plantaza;
 use App\Models\Reservation;
@@ -38,11 +39,48 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
             "bar_chart_podaci" => $podaci2,
         ]);
     })->name('admin.index');
+
+
+    // Plantaze
+    Route::get('/admin/plantaza-list', [PlantazaController::class, 'list'])->name('plantaza.list');
+
+    Route::get('/admin/plantaza-create', [PlantazaController::class, 'create'])->name('plantaza.create');
+
+    Route::get('/admin/plantaza-edit/{id}', [PlantazaController::class, 'edit'])->name('plantaza.edit');
+
+    Route::delete('/admin/plantaza-delete/{id}', [PlantazaController::class, 'destroy'])->name('plantaza.destroy');
+
+    // Sorte
+    Route::get('/admin/sorta-list', [SortaController::class, 'list'])->name('sorta.list');
+
+    Route::get('/admin/sorta-create', [SortaController::class, 'create'])->name('sorta.create');
+
+    Route::get('/admin/sorta-edit/{id}', [SortaController::class, 'edit'])->name('sorta.edit');
+
+    Route::delete('/admin/sorta-delete/{id}', [SortaController::class, 'destroy'])->name('sorta.destroy');
+
+    // Berbe
+    Route::get('/admin/berba-list', [BerbaController::class, 'list'])->name('berba.list');
+
+    Route::get('/admin/berba-create', [BerbaController::class, 'create'])->name('berba.create');
+
+    Route::get('/admin/berba-edit/{id}', [BerbaController::class, 'edit'])->name('berba.edit');
+
+    Route::delete('/admin/berba-delete/{id}', [BerbaController::class, 'destroy'])->name('berba.destroy');
+
+    // Rezervacije TODO: ?
+    Route::get('/admin/reservation-list', [ReservationController::class, 'list'])->name('reservation.list');
+
+    Route::get('/admin/reservation-create', [ReservationController::class, 'create'])->name('reservation.create');
+
+    Route::get('/admin/reservation-edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
+
+    Route::delete('/admin/reservation-delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
 });
 
 
 // regular user
-Route::middleware(['auth', 'role:user'])->group(function(){
+Route::middleware(['auth', 'role:user,editor,admin'])->group(function(){
     Route::get('/reservation-list', [ReservationController::class, 'list'])->name('reservation.list');
 
     Route::get('/reservation-create', [ReservationController::class, 'create'])->name('reservation.create');
