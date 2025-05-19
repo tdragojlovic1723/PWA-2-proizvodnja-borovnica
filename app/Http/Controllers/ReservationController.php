@@ -10,17 +10,9 @@ use Illuminate\Support\Facades\Auth;
 class ReservationController extends Controller
 {
     public function list() {
-        if (Auth::user()->role === 'user') {
-            return view('reservation/list', [
-                "reservations" => Auth::user()->reservations,
-            ]);
-        } else {
-            // TODO: da li je potrebno ovo?
-            // ako editor ili admin pokusavaju da pristupe
-            return view('admin/reservation/list', [
-                "reservations" => Reservation::all(),
-            ]);
-        }
+        return view('reservation/list', [
+            "reservations" => Auth::user()->reservations,
+        ]);
     }
 
     public function create() {
@@ -71,7 +63,11 @@ class ReservationController extends Controller
     public function destroy($id) {
         $r = Reservation::find($id);
         $r->delete();
-        return redirect()->route("reservation.list")->with("success", "Rezervacija uspešno otkazana!");
+
+        if (Auth::user()->role === 'user')
+            return redirect()->route("reservation.list")->with("success", "Rezervacija uspešno otkazana!");
+        else
+            return redirect()->route("admin.index")->with("success", "Rezervacija uspešno otkazana!");
     }
 
 }

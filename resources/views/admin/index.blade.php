@@ -1,8 +1,14 @@
 @extends('layouts.admin.default')
 
 @section('content')
-
 <h1 class="mt-1 mb-4">Dashboard</h1>
+
+@if (session('success'))
+<div class="alert alert-success mt-3 mb-3">
+  <p>{{ session('success') }}</p>
+</div>
+@endif
+
 <div class="row">
   <div class="col-xl-6">
     <div class="card mb-4">
@@ -34,7 +40,7 @@
 
 <h3 class="mt-4 mb-4">CRUD operacije</h3>
 <div class="row">
-  <div class="col-xl-3 col-md-6">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-primary text-white mb-4">
       <div class="card-body">Plantaže</div>
         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -44,7 +50,7 @@
     </div>
   </div>
 
-  <div class="col-xl-3 col-md-6">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-primary text-white mb-4">
       <div class="card-body">Sorte</div>
         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -54,7 +60,7 @@
     </div>
   </div>
 
-  <div class="col-xl-3 col-md-6">
+  <div class="col-xl-4 col-md-6">
     <div class="card bg-primary text-white mb-4">
       <div class="card-body">Berbe</div>
         <div class="card-footer d-flex align-items-center justify-content-between">
@@ -63,20 +69,47 @@
         </div>
     </div>
   </div>
-
-  <!-- TODO: da li je potreban CRUD za rezervacije? zar nema smisla da ima samo read i delete? (tj. cancel) -->
-  <div class="col-xl-3 col-md-6">
-    <div class="card bg-primary text-white mb-4">
-      <div class="card-body">Rezervacije</div>
-        <div class="card-footer d-flex align-items-center justify-content-between">
-          <a class="small text-white stretched-link" href="{{ route('reservation.list') }}">View Details</a>
-            <div class="small text-white"><i class="fas fa-angle-right"></i></div>
-        </div>
-    </div>
-  </div>
 </div>
 
+<h3 class="mt-4 mb-4">Rezervacije</h3>
+
+  <table id="dt" class="display">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Korisnik</th>
+        <th>Sorta</th>
+        <th>Kila rezervisano</th>
+        <th>Datum rezervacije</th>
+        <th>Created / Updated</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      @foreach($reservations as $r)
+        <tr>
+          <td>{{ $r->id }}</td>
+          <td>{{ $r->user->name }}</td>
+          <td>{{ $r->sorta->kind }}</td>
+          <td>{{ $r->kilos_reserved }}</td>
+          <td>{{ $r->date_reserved }}</td>
+          <td>{{ $r->created_at }} / {{ $r->updated_at }}</td>
+
+          <td>
+            <form action="{{ route('admin.reservation.destroy', $r->id) }}" method="POST">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger">Obriši</button>
+            </form>
+          </td>
+        </tr>
+      @endforeach
+    </tbody>
+  </table>
+<div class="row">
+
 <h3 class="mt-4 mb-4">Označavanje istaknutog</h3>
+<!-- TODO: -->
 <div class="row">
 
 </div>
@@ -154,5 +187,15 @@ function drawChart() {
   var chart = new google.visualization.ColumnChart(document.getElementById('columnchart'));
   chart.draw(data, options);
 }
+</script>
+
+<script>
+$(document).ready(function() {
+  $('#dt').DataTable({
+    language: {
+      url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/sr-SP.json'
+    }
+  });
+});
 </script>
 @endsection

@@ -1,7 +1,7 @@
 @extends('layouts/public')
 
 @section('title')
-Vase rezervacije
+Vaše rezervacije
 @endsection
 
 @section('content')

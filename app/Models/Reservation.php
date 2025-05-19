@@ -3,7 +3,6 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
 
 class Reservation extends Model
 {
@@ -14,7 +13,7 @@ class Reservation extends Model
         'date_reserved',
     ];
 
-    public function users() {
+    public function user() {
         return $this->belongsTo(User::class);
     }
 

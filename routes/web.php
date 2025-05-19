@@ -27,19 +27,19 @@ Route::get('/kontakt', function () {
     return view('kontakt');
 })->name('kontakt');
 
-
 // admin, editor
 Route::middleware(['auth', 'role:admin,editor'])->group(function(){
     Route::get('/admin//', function() {
         $podaci = Berba::brojBerbiPoVrstiIzZemlje('Srbija');
         $podaci2 = Reservation::brojRezervacijaPoMesecima();
+        $reservations = Reservation::all();
 
         return view('admin.index', [
             "pie_chart_podaci" => $podaci,
             "bar_chart_podaci" => $podaci2,
+            "reservations" => $reservations,
         ]);
     })->name('admin.index');
-
 
     // Plantaze
     Route::get('/admin/plantaza-list', [PlantazaController::class, 'list'])->name('plantaza.list');
@@ -68,16 +68,9 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
 
     Route::delete('/admin/berba-delete/{id}', [BerbaController::class, 'destroy'])->name('berba.destroy');
 
-    // Rezervacije TODO: ?
-    Route::get('/admin/reservation-list', [ReservationController::class, 'list'])->name('reservation.list');
-
-    Route::get('/admin/reservation-create', [ReservationController::class, 'create'])->name('reservation.create');
-
-    Route::get('/admin/reservation-edit/{id}', [ReservationController::class, 'edit'])->name('reservation.edit');
-
-    Route::delete('/admin/reservation-delete/{id}', [ReservationController::class, 'destroy'])->name('reservation.destroy');
+    // Rezervacije
+    Route::delete('/admin/reservation-delete/{id}', [ReservationController::class, 'destroy'])->name('admin.reservation.destroy');
 });
-
 
 // regular user
 Route::middleware(['auth', 'role:user,editor,admin'])->group(function(){
