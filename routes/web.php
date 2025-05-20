@@ -45,8 +45,10 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
     Route::get('/admin/plantaza-list', [PlantazaController::class, 'list'])->name('plantaza.list');
 
     Route::get('/admin/plantaza-create', [PlantazaController::class, 'create'])->name('plantaza.create');
+    Route::post('/admin/plantaza-create', [PlantazaController::class, 'store'])->name('plantaza.store');
 
     Route::get('/admin/plantaza-edit/{id}', [PlantazaController::class, 'edit'])->name('plantaza.edit');
+    Route::post('/admin/plantaza-edit/{id}', [PlantazaController::class, 'update'])->name('plantaza.update');
 
     Route::delete('/admin/plantaza-delete/{id}', [PlantazaController::class, 'destroy'])->name('plantaza.destroy');
 

@@ -8,11 +8,8 @@ Vaše rezervacije
 
 <div class="w3-content w3-justify w3-text-grey w3-padding-64 p-3">
   <div class="w3-full w3-padding">
-    @if (session('success'))
-    <div class="alert alert-success mt-3 mb-3">
-      <p>{{ session('success') }}</p>
-    </div>
-    @endif
+
+    @include('komponente.prikaz_uspeha')
 
     <div class="d-flex justify-content-between align-items-center">
       <h2 class="w3-padding-16 w3-text-light-grey text-center">Vaše rezervacije</h2>

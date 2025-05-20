@@ -5,6 +5,9 @@
 
 <a href="{{ route('plantaza.create') }}" class="btn btn-primary mt-2 mb-4">Dodaj plantažu</a>
 
+@include('komponente.prikaz_uspeha')
+@include('komponente.prikaz_greski')
+
 <table id="dt" class="display">
   <thead>
     <tr>

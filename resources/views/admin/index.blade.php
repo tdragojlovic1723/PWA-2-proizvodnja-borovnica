@@ -3,11 +3,7 @@
 @section('content')
 <h1 class="mt-1 mb-4">Dashboard</h1>
 
-@if (session('success'))
-<div class="alert alert-success mt-3 mb-3">
-  <p>{{ session('success') }}</p>
-</div>
-@endif
+@include('komponente.prikaz_uspeha')
 
 <div class="row">
   <div class="col-xl-6">

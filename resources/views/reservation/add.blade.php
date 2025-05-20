@@ -10,16 +10,8 @@ Nova rezervacija
     <h2 class="w3-padding-16 w3-text-light-grey text-center">Kreiranje rezervacije</h2>
 
     <div class="text-center col-md-6">
-      @if ($errors->any())
-      <div class="alert alert-danger mt-3 mb-3">
-        <strong>Greške:</strong>
-        <ul class="mb-1">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-      </div>
-      @endif
+
+      @include('komponente.prikaz_greski')
 
       <form action="{{ route('reservation.create') }}" class="d-flex flex-column gap-2" method="POST">
         @csrf
