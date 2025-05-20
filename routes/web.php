@@ -56,8 +56,10 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
     Route::get('/admin/sorta-list', [SortaController::class, 'list'])->name('sorta.list');
 
     Route::get('/admin/sorta-create', [SortaController::class, 'create'])->name('sorta.create');
+    Route::post('/admin/sorta-create', [SortaController::class, 'store'])->name('sorta.store');
 
     Route::get('/admin/sorta-edit/{id}', [SortaController::class, 'edit'])->name('sorta.edit');
+    Route::post('/admin/sorta-edit/{id}', [SortaController::class, 'update'])->name('sorta.update');
 
     Route::delete('/admin/sorta-delete/{id}', [SortaController::class, 'destroy'])->name('sorta.destroy');
 

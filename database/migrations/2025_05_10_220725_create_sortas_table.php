@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('sortas', function (Blueprint $table) {
             $table->id();
             $table->string("kind");
-            $table->text("description");
+            $table->text("description")->nullable();
             $table->decimal("average_fruit_size", 8, 2);
             $table->decimal("average_fertility", 8, 1);
             $table->string("image")->default("default.jpg");

@@ -51,7 +51,7 @@ Katalog
                 }
               </style>
 
-              <p class="text-3-lines">{{ Str::limit($s->description, 100, '...') }}</p>
+              <p class="text-3-lines">{{ strip_tags(Str::limit($s->description, 100, '...')) }}</p>
 
               <a href="#test" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Opširnije</a>
             </div>

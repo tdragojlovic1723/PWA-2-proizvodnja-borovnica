@@ -5,6 +5,9 @@
 
 <a href="{{ route('sorta.create') }}" class="btn btn-primary mt-2 mb-4">Dodaj sortu</a>
 
+@include('komponente.prikaz_uspeha')
+@include('komponente.prikaz_greski')
+
 <table id="dt" class="display">
   <thead>
     <tr>
@@ -24,11 +27,14 @@
       <tr>
         <td>{{ $s->id }}</td>
         <td>{{ $s->kind }}</td>
-        <td>{{ Str::limit($s->description, 50, '...') }}</td>
+        <td>{{ strip_tags(Str::limit($s->description, 50, '...')) }}</td>
         <td>{{ $s->average_fruit_size }}</td>
         <td>{{ $s->average_fertility }}</td>
         <!-- TODO: slika prikazuje samo tekst -->
-        <td>{{ $s->image }}</td>
+        <td>
+          <img src="{{ asset('storage/' . $s->image) }}" style="width: 10rem;" alt="">
+        </td>
+
         <td>{{ $s->created_at }} / {{ $s->updated_at }}</td>
         <td>
           <a href="{{ route('sorta.edit', $s->id) }}" class="btn btn-primary">Izmeni</a>
