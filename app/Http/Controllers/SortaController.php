@@ -56,7 +56,7 @@ class SortaController extends Controller
 
     public function update(Request $req, $id) {
         $valid = $req->validate([
-            "kind" => "required|string|unique:sortas,kind," . $id,
+            "kind" => "required|string|max:128|unique:sortas,kind," . $id,
             "description" => "nullable|string",
             'average_fruit_size' => 'required|decimal:0,2|min:0.1',
             'average_fertility' => 'required|decimal:0,1|min:0.1',

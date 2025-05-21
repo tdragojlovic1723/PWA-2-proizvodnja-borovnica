@@ -88,8 +88,8 @@
           <td>{{ $r->user->name }}</td>
           <td>{{ $r->sorta->kind }}</td>
           <td>{{ $r->kilos_reserved }}</td>
-          <td>{{ $r->date_reserved }}</td>
-          <td>{{ $r->created_at }} / {{ $r->updated_at }}</td>
+          <td>{{ date('d.m.Y', strtotime($r->date_reserved)) }}</td>
+          <td>{{ date('d.m.Y H:m', strtotime($r->created_at)) }} / {{ date('d.m.Y H:m', strtotime($r->updated_at)) }}</td>
 
           <td>
             <form action="{{ route('admin.reservation.destroy', $r->id) }}" method="POST">

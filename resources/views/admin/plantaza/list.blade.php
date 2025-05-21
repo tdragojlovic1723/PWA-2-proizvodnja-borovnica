@@ -30,7 +30,7 @@
         <td>{{ $p->city }}</td>
         <td>{{ $p->surface }}</td>
 
-        <td>{{ $p->created_at }} / {{ $p->updated_at }}</td>
+        <td>{{ date('d.m.Y H:m', strtotime($p->created_at)) }} / {{ date('d.m.Y H:m', strtotime($p->updated_at)) }}</td>
 
         <td>
           <a href="{{ route('plantaza.edit', $p->id) }}" class="btn btn-primary">Izmeni</a>

@@ -7,6 +7,15 @@ use Illuminate\Support\Facades\DB;
 
 class Berba extends Model
 {
+    protected $fillable = [
+        'date_harvested',
+        'summary',
+        'grade',
+        'kilos_harvested',
+        'sorta_id',
+        'plantaza_id',
+    ];
+
     public function plantaza() {
         return $this->belongsTo(Plantaza::class);
     }

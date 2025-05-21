@@ -67,8 +67,10 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
     Route::get('/admin/berba-list', [BerbaController::class, 'list'])->name('berba.list');
 
     Route::get('/admin/berba-create', [BerbaController::class, 'create'])->name('berba.create');
+    Route::post('/admin/berba-create', [BerbaController::class, 'store'])->name('berba.store');
 
     Route::get('/admin/berba-edit/{id}', [BerbaController::class, 'edit'])->name('berba.edit');
+    Route::post('/admin/berba-edit/{id}', [BerbaController::class, 'update'])->name('berba.update');
 
     Route::delete('/admin/berba-delete/{id}', [BerbaController::class, 'destroy'])->name('berba.destroy');
 

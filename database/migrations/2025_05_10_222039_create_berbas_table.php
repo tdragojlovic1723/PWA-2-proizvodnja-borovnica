@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('berbas', function (Blueprint $table) {
             $table->id();
             $table->date("date_harvested");
-            $table->string("summary", 1024);
+            $table->string("summary", 1024)->nullable();
             $table->integer("grade");
             $table->integer("kilos_harvested");
             $table->foreignId("sorta_id")->constrained("sortas");

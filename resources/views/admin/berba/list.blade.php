@@ -5,6 +5,9 @@
 
 <a href="{{ route('berba.create') }}" class="btn btn-primary mt-2 mb-4">Dodaj berbu</a>
 
+@include('komponente.prikaz_uspeha')
+@include('komponente.prikaz_greski')
+
 <table id="dt" class="display">
   <thead>
     <tr>
@@ -24,13 +27,13 @@
     @foreach($berbe as $b)
       <tr>
         <td>{{ $b->id }}</td>
-        <td>{{ $b->date_harvested }}</td>
+        <td>{{ date('d.m.Y', strtotime($b->date_harvested)) }}</td>
         <td>{{ Str::limit($b->summary, 50, '...') }}</td>
         <td>{{ $b->grade }}</td>
         <td>{{ $b->kilos_harvested }}</td>
         <td>{{ $b->sorta->kind }}</td>
         <td>{{ $b->plantaza->name }}</td>
-        <td>{{ $b->created_at }} / {{ $b->updated_at }}</td>
+        <td>{{ date('d.m.Y H:m', strtotime($b->created_at)) }} / {{ date('d.m.Y H:m', strtotime($b->updated_at)) }}</td>
         <td>
           <a href="{{ route('berba.edit', $b->id) }}" class="btn btn-primary">Izmeni</a>
         </td>
