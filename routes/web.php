@@ -23,6 +23,8 @@ Route::get('/katalog', function () {
     ]);
 })->name('katalog');
 
+Route::get('/katalog/single/{id}', [SortaController::class, 'single'])->name('sorta.single');
+
 Route::get('/kontakt', function () {
     return view('kontakt');
 })->name('kontakt');
@@ -79,7 +81,7 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
 });
 
 // regular user
-Route::middleware(['auth', 'role:user,editor,admin'])->group(function(){
+Route::middleware(['auth', 'role:user'])->group(function(){
     Route::get('/reservation-list', [ReservationController::class, 'list'])->name('reservation.list');
 
     Route::get('/reservation-create', [ReservationController::class, 'create'])->name('reservation.create');

@@ -13,6 +13,12 @@ class SortaController extends Controller
         ]);
     }
 
+    public function single($id) {
+        return view('single', [
+            "s" => Sorta::find($id),
+        ]);
+    }
+
     public function create() {
         return view('admin/sorta/add');
     }

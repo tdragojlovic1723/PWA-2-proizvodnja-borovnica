@@ -24,7 +24,7 @@ class BerbaController extends Controller
 
     public function store(Request $req) {
         $valid = $req->validate([
-            "date_harvested" => "required|date",
+            "date_harvested" => "required|date|before_or_equal:today",
             "summary" => "nullable|string|max:1024",
             "grade" => "required|numeric|min:1|max:10",
             "kilos_harvested" => "required|numeric|min:1",
@@ -49,7 +49,7 @@ class BerbaController extends Controller
 
     public function update(Request $req, $id) {
         $valid = $req->validate([
-            "date_harvested" => "required|date",
+            "date_harvested" => "required|date|before_or_equal:today",
             "summary" => "nullable|string|max:1024",
             "grade" => "required|numeric|min:1|max:10",
             "kilos_harvested" => "required|numeric|min:1",

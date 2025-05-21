@@ -53,7 +53,7 @@ Katalog
 
               <p class="text-3-lines">{{ strip_tags(Str::limit($s->description, 100, '...')) }}</p>
 
-              <a href="#test" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Opširnije</a>
+              <a href="{{ route('sorta.single', $s->id) }}" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Opširnije</a>
             </div>
 
           </div>
