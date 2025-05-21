@@ -4,6 +4,7 @@ use App\Http\Controllers\BerbaController;
 use App\Http\Controllers\PlantazaController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ReservationController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\SortaController;
 use App\Models\Berba;
 use App\Models\Plantaza;
@@ -13,7 +14,22 @@ use Illuminate\Support\Facades\Route;
 
 // public
 Route::get('/', function () {
-    return view('welcome');
+    $settings = json_decode(file_get_contents(storage_path('app/settings.json')), true);
+    $ponuda = $settings['ponuda'];
+    $opis_ponude = '';
+
+    if($ponuda === '1') {
+        $sortas = Sorta::najplodnijeSorte();
+        $opis_ponude = 'Sorte sa najviše plodova';
+    } else {
+        $sortas = Sorta::najveceSorte();
+        $opis_ponude = 'Najveće sorte po veličini';
+    }
+
+    return view('welcome', [
+        "sortas" => $sortas,
+        "naslov" => $opis_ponude,
+    ]);
 })->name('index');
 
 Route::get('/katalog', function () {
@@ -78,6 +94,10 @@ Route::middleware(['auth', 'role:admin,editor'])->group(function(){
 
     // Rezervacije
     Route::delete('/admin/reservation-delete/{id}', [ReservationController::class, 'destroy'])->name('admin.reservation.destroy');
+
+    // Ponude
+    Route::get('/admin/ponuda-edit', [SettingsController::class, 'edit'])->name('ponuda.edit');
+    Route::post('/admin/ponuda-edit', [SettingsController::class, 'update'])->name('ponuda.update');
 });
 
 // regular user

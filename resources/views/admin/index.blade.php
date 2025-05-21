@@ -105,7 +105,9 @@
 <div class="row">
 
 <h3 class="mt-4 mb-4">Označavanje istaknutog</h3>
-<!-- TODO: -->
+  <div class="col-md2">
+    <a href="{{ route('ponuda.edit') }}" class="btn btn-primary">Izmeni istaknuto</a>
+  </div>
 <div class="row">
 
 </div>

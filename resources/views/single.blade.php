@@ -20,11 +20,11 @@ Single sorta
           <p class="card-text">{!! $s->description !!}</p>
 
           <p class="card-text w3-text-green">
-            Prosečna veličina ploda: {{ $s->average_fruit_size }}<br>
-            Prosečna plodnost ploda: {{ $s->average_fertility }}<br>
+            Prosečna veličina ploda (broj plodova po biljci): <b>{{ $s->average_fruit_size }}</b><br>
+            Prosečna plodnost ploda (u centimetrima, prečnik): <b>{{ $s->average_fertility }}</b><br>
           </p>
 
-          <a href="{{ route('katalog') }}" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Nazad</a>
+          <a href="{{ url()->previous() }}" class="w3-button w3-dark-grey w3-padding-large w3-margin-bottom">Nazad</a>
         </div>
       </div>
     </div>
