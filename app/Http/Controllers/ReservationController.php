@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\Sorta;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class ReservationController extends Controller
 {
@@ -36,11 +37,16 @@ class ReservationController extends Controller
     }
 
     public function edit($id) {
-        $tr = Reservation::find($id);
+        try {
+            $tr = Reservation::findOrFail($id);
 
-        // korisnik ne sme da menja tudje rezervacije
-        if ($tr->user_id !== Auth::user()->id) {
-            abort(403, 'Nemate dozvolu da izmenite ovu rezervaciju.');
+            // korisnik ne sme da menja tudje rezervacije
+            if ($tr->user_id !== Auth::user()->id) {
+                abort(403, 'Nemate dozvolu da izmenite ovu rezervaciju.');
+            }
+        } catch (ModelNotFoundException $e) {
+            // greska ako ne postoji rezervacija sa datim id
+            abort(404);
         }
 
         return view('reservation/edit', [
